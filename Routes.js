@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+var LinvoDB = require("linvodb3");
+LinvoDB.dbPath = process.cwd();
+var Foods = new LinvoDB("doc", { /* schema, can be empty */ });
 
 router.get('/',function(request,response){
     response.sendFile('Epulae-Alpha.html', {"root": __dirname});

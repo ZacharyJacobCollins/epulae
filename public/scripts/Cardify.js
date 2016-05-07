@@ -18,6 +18,7 @@ var Cardify = function (DataModel,options){
     this.cardControlContainer = $('<div>').addClass('cardControlContainer');
     this.DataModel = DataModel;
     this.options = options;
+    this.card.data('options',options);
 
 
     this.applyPicture();
@@ -87,8 +88,9 @@ Cardify.prototype = {
         var $this = $(this);
         var parent = $this.closest('.card');
         var cardData = parent.data('data');
+        var options = parent.data('options');
         $.post(
-            this.options.postEditAddress,
+            options.postEditAddress,
             cardData,
             function(){
                 console.log("Card has been saved. :)");
@@ -106,6 +108,7 @@ Cardify.prototype = {
         //Sweetalert deletion confirmation
         var $this = $(this);
         var parent = $this.closest('.card');
+        var options = parent.data('options');
         var id = _.find(parent.data('data'),{'key':'_id'}).value;
         swal({
             title: 'Are you sure?',
@@ -118,7 +121,7 @@ Cardify.prototype = {
             closeOnConfirm: false
         }).then(function(isConfirm) {
             if (isConfirm) {
-                $.post( "http://localhost:1020/deleteFoodItem",
+                $.post( "options.postDeleteAddress",
                     {'id':id},
                     function(){
                         swal(
