@@ -3,9 +3,6 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var schedule = require('node-schedule');
-var LinvoDB = require("linvodb3");
-LinvoDB.dbPath = process.cwd();
-var Foods = new LinvoDB("doc", { /* schema, can be empty */ });
 var util = require('util');
 var path = require('path');
 
