@@ -1,0 +1,8 @@
+Add restaurant choosing option
+
+    1) Meijer
+    2) Kroger
+    3) Trader Joe's
+    4) Costco
+    5) Whole Food
+    6) Aldis
