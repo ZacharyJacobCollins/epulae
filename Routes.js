@@ -16,7 +16,7 @@ router.get('/downloadFoodItems',function(request,response){
 router.post('/addFoodItem',function(request,response){
     console.log(request.body);
     Foods.insert(request.body, function (err, newDoc) {
-        response.send({message:"New food item added: "+request.body.Name});
+        response.send({message:"New food item added: "+request.body});
     });
 });
 
