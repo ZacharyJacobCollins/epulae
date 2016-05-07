@@ -6,3 +6,8 @@ Add restaurant choosing option
     4) Costco
     5) Whole Food
     6) Aldis
+
+Package.json
+  https://codeforgeek.com/2014/11/file-uploads-using-node-js/
+
+  

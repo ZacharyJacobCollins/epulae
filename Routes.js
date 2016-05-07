@@ -1,6 +1,7 @@
 var express = require('express');
 var multer  = require('multer');
 var LinvoDB = require("linvodb3");
+var fs      = require("fs");
 
 var router  = express.Router();
 var upload  = multer();
@@ -8,7 +9,17 @@ var upload  = multer();
 var uploading = multer({
   dest: __dirname + '../public/uploads/',
   limits: {fileSize: 1000000, files:1},
-})
+});
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.jpg') //Appending .jpg
+  }
+});
+
 LinvoDB.dbPath = process.cwd();
 var Foods = new LinvoDB("doc", { /* schema, can be empty */ });
 
@@ -18,12 +29,13 @@ router.get('/',function(request,response){
 
 router.post('/pictures/upload', [ upload.single('image'), function(request, response) {
     var file = request.file;
-    console.log(file);
+    fs.writeFile(file.originalname+".jpg", new Buffer(request.body.photo, "base64"), function(err) {
+      console.log(err);
+    });
     response.end();
 }]);
 
 router.get('/reciept',function(request,response){
-    console.log("no bueno");
     response.sendFile('Reciept.html', {"root":__dirname + "/views/"});
 });
 
