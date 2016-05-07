@@ -1,2 +1,6 @@
 # Epulae
-Never waste food again! 
+Never waste food again!
+
+# Future Features
+Bar for freshness
+Reciept Photo
