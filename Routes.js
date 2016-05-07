@@ -35,4 +35,4 @@ router.post('/deleteFoodItem',function(request,response){
     });
 });
 
-modules.export = router;
+module.exports = router;
