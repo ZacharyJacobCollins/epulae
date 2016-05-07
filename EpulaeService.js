@@ -20,39 +20,7 @@ app.use(allowCrossDomain);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use("/public",  express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
-
-app.get('/',function(request,response){
-    response.sendFile('Epulae-Alpha.html', {"root": __dirname});
-});
-
-app.get('/downloadFoodItems',function(request,response){
-    console.log("New foods download request.");
-    Foods.find({}, function (err, docs) {
-        response.send(docs);
-    });
-});
-
-app.post('/addFoodItem',function(request,response){
-    console.log(request.body);
-    Foods.insert(request.body, function (err, newDoc) {
-        response.send({message:"New food item added: "+request.body.Name});
-    });
-});
-
-
-app.post('/editFoodItem',function(request,response){
-    Foods.findOne({ foodID: request.foodID }, function(err, doc) {
-    doc.save(function(err) { response.send({message:"Food updated successfully."})}); 
-    });
-});
-
-app.post('/deleteFoodItem',function(request,response){
-    var id = request.id;
-    Foods.remove({ id: id }, {}, function (err, numRemoved) {
-        console.log("Food removed successfully.");
-        response.send({message: "Food removed successfully: "+id})
-    });
-});
+app.use(require('./Routes'));
 
 var server = app.listen(1020, function(){
     var host = server.address().address;
